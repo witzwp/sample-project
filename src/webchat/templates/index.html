@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebChat - Real-time Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <h1>💬 WebChat</h1>
+            <p>Enter your username to join the chat</p>
+            <form id="login-form">
+                <input 
+                    type="text" 
+                    id="username-input" 
+                    placeholder="Your username" 
+                    maxlength="20"
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit">Join Chat</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chat Screen -->
+    <div id="chat-screen" class="screen">
+        <div class="chat-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>💬 WebChat</h2>
+                </div>
+                <div class="users-section">
+                    <h3>Online Users (<span id="user-count">0</span>)</h3>
+                    <ul id="users-list"></ul>
+                </div>
+                <div class="sidebar-footer">
+                    <span id="current-user"></span>
+                    <button id="leave-btn">Leave</button>
+                </div>
+            </aside>
+
+            <!-- Main Chat Area -->
+            <main class="chat-main">
+                <div class="chat-header">
+                    <h3>#general</h3>
+                    <span id="typing-indicator"></span>
+                </div>
+                
+                <div id="messages-container">
+                    <div id="messages"></div>
+                </div>
+
+                <form id="message-form" class="message-input-area">
+                    <input 
+                        type="text" 
+                        id="message-input" 
+                        placeholder="Type your message..."
+                        autocomplete="off"
+                        maxlength="500"
+                    >
+                    <button type="submit">Send</button>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

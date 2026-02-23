@@ -3,16 +3,16 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sample-project"
+name = "webchat"
 version = "0.1.0"
-description = "A modern Python CLI tool template"
+description = "A simple real-time web chat application"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.8"
 authors = [
     {name = "Your Name", email = "your.email@example.com"}
 ]
-keywords = ["cli", "template", "sample"]
+keywords = ["webchat", "chat", "websocket", "flask"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -23,9 +23,13 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Framework :: Flask",
 ]
 dependencies = [
-    "click>=8.0",
+    "flask>=2.0",
+    "flask-socketio>=5.0",
+    "python-socketio>=5.0",
+    "eventlet>=0.33",
 ]
 
 [project.optional-dependencies]
@@ -35,15 +39,16 @@ dev = [
     "black>=23.0",
     "mypy>=1.0",
     "types-setuptools",
+    "types-Flask-SocketIO",
 ]
 
 [project.scripts]
-sample-cli = "sample_project.cli:main"
+webchat = "webchat.app:main"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/sample-project"
-Repository = "https://github.com/yourusername/sample-project"
-Issues = "https://github.com/yourusername/sample-project/issues"
+Homepage = "https://github.com/witzwp/webchat"
+Repository = "https://github.com/witzwp/webchat"
+Issues = "https://github.com/witzwp/webchat/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -54,10 +59,15 @@ target-version = ['py38']
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-v --cov=sample_project --cov-report=term-missing"
+addopts = "-v --cov=webchat --cov-report=term-missing"
 
 [tool.mypy]
 python_version = "3.8"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "flask_socketio"
+ignore_missing_imports = true
