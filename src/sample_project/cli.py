@@ -1,5 +1,7 @@
 """CLI module for sample project."""
 
+from __future__ import annotations
+
 import click
 
 from sample_project import __version__
@@ -17,7 +19,7 @@ def cli() -> None:
 @click.option("--upper", "-u", is_flag=True, help="Convert to uppercase")
 def greet(name: str, upper: bool) -> None:
     """Greet someone by name.
-    
+
     Args:
         name: The name to greet
         upper: Whether to convert the greeting to uppercase
@@ -32,7 +34,7 @@ def greet(name: str, upper: bool) -> None:
 @click.argument("numbers", nargs=-1, type=float)
 def sum_numbers(numbers: tuple[float, ...]) -> None:
     """Sum a list of numbers.
-    
+
     Args:
         numbers: Numbers to sum
     """
